@@ -2,23 +2,26 @@ package main
 
 import "testing"
 
-
 func TestHello(t *testing.T) {
-    got := Hello()
-    want := "Hello, World"
+    t.Run("saying, hello to people", func(t *testing.T) {
+        got := Hello("name")
+        want := "Hello, name"
+        assertCorrectMessage(t, got, want)
+    })
 
-    if got != want {
-        t.Errorf("got =  %v, want = %v", got, want)
-    }
+    t.Run("saying hello to world", func(t *testing.T) {
+        got := Hello("")
+        want := "Hello, World"
 
-}
-
-func TestGreeting(t *testing.T) {
-    got := Greeting("kash")
-    want := "Hello, kash"
-
-    if got != want {
-        t.Errorf("got: %q, want: %q", got, want)
-    }
+        assertCorrectMessage(t, got, want)
+    })
 
 }
+
+func assertCorrectMessage(t testing.TB, got string, want string) {
+    t.Helper()
+    if got != want {
+        t.Errorf("got: %q, want: %q",got, want)
+    }
+}
+
