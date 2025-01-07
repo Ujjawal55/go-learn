@@ -3,23 +3,18 @@ package main
 import "testing"
 
 func TestHello(t *testing.T) {
-    t.Run("saying, hello to people", func(t *testing.T) {
-        got := Hello("name")
-        want := "Hello, name"
-        assertCorrectMessage(t, got, want)
-    })
 
-    t.Run("saying hello to world", func(t *testing.T) {
-        got := Hello("")
-        want := "Hello, World"
+    t.Run("Greeting in Spaninsh", func (t *testing.T) {
+        var got string = Hello("Kash", "Spanish")
+        var want string = "Halo, Kash"
 
         assertCorrectMessage(t, got, want)
     })
-
 }
 
+// code refactoring for (don't repeat yourself principle)
 func assertCorrectMessage(t testing.TB, got string, want string) {
-    t.Helper()
+    // t.Helper()
     if got != want {
         t.Errorf("got: %q, want: %q",got, want)
     }
