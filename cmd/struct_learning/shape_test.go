@@ -2,41 +2,47 @@ package struct_learning
 
 import "testing"
 
-
 func TestPermeter(t *testing.T) {
-    rectangle := Rectangle{10.0, 10.0}
-    got := Perimeter(rectangle)
-    want := 2.0 * 10.0 * 10.0
 
-    if got != want {
-        t.Errorf("got: %v, want: %f", got, want)
+    checkPerimeter := func(t testing.TB, shape Shape, want float64) {
+        t.Helper()
+        var got float64 = shape.Perimeter()
+        assertProperty(t, got, want)
+
     }
+
+    rectangle := Rectangle{10.0, 10.0}
+    want := rectangle.Perimeter()
+    checkPerimeter(t, rectangle, want)
 }
 
 func TestArea(t *testing.T) {
+
+    checkArea := func(t testing.TB, shape Shape, want float64) {
+        t.Helper()
+        got := shape.Area()
+
+        assertProperty(t, got, want)
+
+    }
+
     t.Run("Rectangle", func(t *testing.T) {
         rectangle := Rectangle{10.0, 10.0}
-        var got float64 = rectangle.Area()
         var want float64 = 10.0 * 10.0
+        checkArea(t, rectangle, want)
 
-        if (got != want) {
-            t.Errorf("got: %f, want: %f", got, want)
-        }
     })
 
     t.Run("Circle", func(t *testing.T) {
         const pi = 3.141
         circle := Circle{10.0}
-        got := circle.Area()
         want := pi * 10.0 * 10.0
-
-        assertArea(t, got, want)
+        checkArea(t, circle, want)
     })
 
 }
 
-
-func assertArea(t testing.TB, got float64, want float64) {
+func assertProperty(t testing.TB, got float64, want float64) {
     t.Helper()
     if (got != want) {
         t.Errorf("got: %f, want: %f", got, want)
