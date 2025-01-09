@@ -3,10 +3,6 @@ package struct_learning
 import "testing"
 
 
-const pi = 3.141
-
-
-
 func TestPermeter(t *testing.T) {
     rectangle := Rectangle{10.0, 10.0}
     got := Perimeter(rectangle)
@@ -20,7 +16,7 @@ func TestPermeter(t *testing.T) {
 func TestArea(t *testing.T) {
     t.Run("Rectangle", func(t *testing.T) {
         rectangle := Rectangle{10.0, 10.0}
-        var got float64 = Area(rectangle)
+        var got float64 = rectangle.Area()
         var want float64 = 10.0 * 10.0
 
         if (got != want) {
@@ -29,8 +25,9 @@ func TestArea(t *testing.T) {
     })
 
     t.Run("Circle", func(t *testing.T) {
+        const pi = 3.141
         circle := Circle{10.0}
-        got := Area(circle)
+        got := circle.Area()
         want := pi * 10.0 * 10.0
 
         assertArea(t, got, want)

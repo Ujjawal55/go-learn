@@ -1,13 +1,24 @@
 package struct_learning
 
 
+
 type Rectangle struct {
     width float64
     height float64
 }
 
+func (r Rectangle) Area() float64 {
+    return r.height * r.width
+}
+
 type Circle struct {
     radius float64
+}
+
+
+func (c Circle) Area() float64 {
+    const pi = 3.141
+    return pi * c.radius * c.radius
 }
 
 
